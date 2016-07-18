@@ -1,7 +1,7 @@
 module Git
   module Remote
-    module Parser
-      VERSION = "0.1.0"
+    class Parser
+      VERSION = "1.0.0"
     end
   end
 end

@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["JuanitoFatas"]
   spec.email         = ["katehuang0320@gmail.com"]
 
-  spec.summary       = %q{Parse Git Remote into Useful hash.}
+  spec.summary       = %q{Parse Git Remote URI into Useful object.}
   spec.description   = spec.summary
   spec.homepage      = "https://github.com/JuanitoFatas/git-remote-parser"
   spec.license       = "MIT"

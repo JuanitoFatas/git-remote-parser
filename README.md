@@ -1,39 +1,59 @@
 # Git::Remote::Parser
 
+[![Build Status](https://travis-ci.org/JuanitoFatas/git-remote-parser.svg?branch=master)][travis]
+
+[travis]: https://travis-ci.org/JuanitoFatas/git-remote-parser
+
 ## Usage
 
-This gem can parse remote urls:
+This gem can parse remote urls into `Git::Remote::Parser::Result` object:
 
 ```ruby
-parser = Git::Remote::Parser.new
+> parser = Git::Remote::Parser.new
+=> #<Git::Remote::Parser:0x007ffd5c0d4718>
 
-> parser.parse "git@github.com:torvalds/linux.git"
-=> { host: "github.com", owner: "torvalds", repo: "linux", html_url: "https://github.com/torvalds/linux" }
+> result = parser.parse "git@github.com:torvalds/linux.git"
+=> #<Git::Remote::Parser::Result:0x007fb11b82fc70 @protocol=nil, @username="git", @host="github.com", @owner="torvalds", @repo="linux", @html_url="https://github.com/torvalds/linux">
 
-> parser.parse "git@gitlab.com:gitlab-org/gitlab-ce.git"
-=> { host: "gitlab.com", owner: "gitlab-org", repo: "gitlab-ce", html_url: "https://gitlab.com/gitlab-org/gitlab-ce" }
+> result.host
+=> "github.com"
 
-> parser.parse "ssh://hg@bitbucket.org/ged/ruby-pg"
-=> { host: "gitlab.com", owner: "ged", repo: "ruby-pg", html_url: "https://bitbucket.org/ged/ruby-pg" }
+> result.owner
+=> "torvalds"
+
+> result.repo
+=> "linux"
+
+> result.html_url
+=> "https://github.com/torvalds/linux"
+
+> result.to_h
+=> {:protocol=>nil, :username=>"git", :host=>"github.com", :owner=>"torvalds", :repo=>"linux", :html_url=>"https://github.com/torvalds/linux"}
 ```
 
-Currently support parsing for these Git providers:
+Tested work for these Git providers:
 
 * [GitHub][github]
 
-  - https://github.com/torvalds/linux.git
-  - git@github.com:torvalds/linux.git
+  Examples:
+
+  - `https://github.com/torvalds/linux.git`
+  - `git@github.com:torvalds/linux.git`
 
 * [Gitlab][gitlab]
 
-  - https://gitlab.com/gitlab-org/gitlab-ce.git
-  - git@gitlab.com:gitlab-org/gitlab-ce.git
+  Examples:
+
+  - `https://gitlab.com/gitlab-org/gitlab-ce.git`
+  - `git@gitlab.com:gitlab-org/gitlab-ce.git`
 
 * [Bitbucket][bitbucket]
 
-  - https://JuanitoFatas@bitbucket.org/ged/ruby-pg
-  - ssh://hg@bitbucket.org/ged/ruby-pg
-  - and legacy bitbucket.com
+  Examples:
+
+  - `https://JuanitoFatas@bitbucket.org/ged/ruby-pg`
+  - `ssh://hg@bitbucket.org/ged/ruby-pg`
+  - and legacy host `bitbucket.com`
 
 [github]: https://github.com
 [gitlab]: https://gitlab.com
@@ -46,7 +66,7 @@ Add this line to your application's Gemfile:
 ```ruby
 gem 'git-remote-parser'
 
-# or double quote:
+# or double quote if you prefer:
 
 gem "git-remote-parser"
 ```
@@ -59,15 +79,9 @@ Or install it yourself as:
 
     $ gem install git-remote-parser
 
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/hack` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/JuanitoFatas/git-remote-parser.
+See [CONTRIBUTING.md](/CONTRIBUTING.md)
 
 ## License
 
